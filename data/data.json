@@ -1,0 +1,83 @@
+[
+  {
+    "description": "bicicleta número 1",
+    "title": "bici1",
+    "price": 1000,
+    "thumbnail": "img",
+    "code": "aaa111",
+    "stock": 2,
+    "id": 1
+  },
+  {
+    "description": "bicicleta número 2",
+    "title": "bici2",
+    "price": 1100,
+    "thumbnail": "img",
+    "code": "ata111",
+    "stock": 2,
+    "id": 2
+  },
+  {
+    "description": "bicicleta número 3",
+    "title": "bici3",
+    "price": 1200,
+    "thumbnail": "img",
+    "code": "afa111",
+    "stock": 2,
+    "id": 3
+  },
+  {
+    "description": "bicicleta número 4",
+    "title": "bici4",
+    "price": 1300,
+    "thumbnail": "img",
+    "code": "aba111",
+    "stock": 2,
+    "id": 4
+  },
+  {
+    "description": "bicicleta número 5",
+    "title": "bici5",
+    "price": 1400,
+    "thumbnail": "img",
+    "code": "aaa311",
+    "stock": 2,
+    "id": 5
+  },
+  {
+    "description": "bicicleta número 6",
+    "title": "bici6",
+    "price": 1500,
+    "thumbnail": "img",
+    "code": "aaa171",
+    "stock": 2,
+    "id": 6
+  },
+  {
+    "description": "bicicleta número 7",
+    "title": "bici7",
+    "price": 1600,
+    "thumbnail": "img",
+    "code": "aaa191",
+    "stock": 2,
+    "id": 7
+  },
+  {
+    "description": "bicicleta número 8",
+    "title": "bici8",
+    "price": 1700,
+    "thumbnail": "img",
+    "code": "aac111",
+    "stock": 2,
+    "id": 8
+  },
+  {
+    "description": "producto 9 modificado",
+    "title": "bici999",
+    "price": 1800,
+    "thumbnail": "img",
+    "code": "aab111",
+    "stock": 2,
+    "id": 9
+  }
+]
