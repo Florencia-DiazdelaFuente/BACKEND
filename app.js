@@ -1,4 +1,5 @@
-const fs = require("fs")
+import fs from "fs"
+
 
 class ProductManager {
     
@@ -104,7 +105,9 @@ class ProductManager {
 
     readProduct(id) {
         let oneProd = this.products.find(el=>el.id===id)
+        console.log(oneProd)
         return oneProd
+        
 
     }
 
@@ -112,6 +115,7 @@ class ProductManager {
     async updateProduct(id, data) {
         try {
             let oneProd = this.readProduct(id)
+
             if (!oneProd) {
                 console.log("not found")
             } else {
@@ -144,23 +148,25 @@ class ProductManager {
     }
 }
 
+let manager = new ProductManager("./data/data.json")
 
-async function manager() {
-    let manager = new ProductManager("./data/data.json")
-    await manager.addProduct({title: "bici1", description: "bicicleta número 1", price: 1000, thumbnail: "img", code: "aaa111", stock: 2})
-    await manager.addProduct({title: "bici2", description: "bicicleta número 2", price: 1100, thumbnail: "img", code: "ata111", stock: 2})
-    await manager.addProduct({title: "bici3", description: "bicicleta número 3", price: 1200, thumbnail: "img", code: "afa111", stock: 2})
-    await manager.addProduct({title: "bici4", description: "bicicleta número 4", price: 1300, thumbnail: "img", code: "aba111", stock: 2})
-    await manager.addProduct({title: "bici5", description: "bicicleta número 5", price: 1400, thumbnail: "img", code: "aaa311", stock: 2})
-    await manager.addProduct({title: "bici6", description: "bicicleta número 6", price: 1500, thumbnail: "img", code: "aaa171", stock: 2})
-    await manager.addProduct({title: "bici7", description: "bicicleta número 7", price: 1600, thumbnail: "img", code: "aaa191", stock: 2})
-    await manager.addProduct({title: "bici8", description: "bicicleta número 8", price: 1700, thumbnail: "img", code: "aac111", stock: 2})
-    await manager.addProduct({title: "bici9", description: "bicicleta número 9", price: 1800, thumbnail: "img", code: "aab111", stock: 2})
-    await manager.addProduct({title: "bici10", description: "bicicleta número 10", price: 1900, thumbnail: "img", code: "qaa111", stock: 2})
-    await manager.getProductById(9)
-    await manager.updateProduct(9, {title: "bici999", description: "producto 9 modificado"})
-    await manager.deleteProduct(10)
-    await manager.getProducts()
+// async function manager() {
+//     await manager.addProduct({title: "bici1", description: "bicicleta número 1", price: 1000, thumbnail: "img", code: "aaa111", stock: 2})
+//     await manager.addProduct({title: "bici2", description: "bicicleta número 2", price: 1100, thumbnail: "img", code: "ata111", stock: 2})
+//     await manager.addProduct({title: "bici3", description: "bicicleta número 3", price: 1200, thumbnail: "img", code: "afa111", stock: 2})
+//     await manager.addProduct({title: "bici4", description: "bicicleta número 4", price: 1300, thumbnail: "img", code: "aba111", stock: 2})
+//     await manager.addProduct({title: "bici5", description: "bicicleta número 5", price: 1400, thumbnail: "img", code: "aaa311", stock: 2})
+//     await manager.addProduct({title: "bici6", description: "bicicleta número 6", price: 1500, thumbnail: "img", code: "aaa171", stock: 2})
+//     await manager.addProduct({title: "bici7", description: "bicicleta número 7", price: 1600, thumbnail: "img", code: "aaa191", stock: 2})
+//     await manager.addProduct({title: "bici8", description: "bicicleta número 8", price: 1700, thumbnail: "img", code: "aac111", stock: 2})
+//     await manager.addProduct({title: "bici9", description: "bicicleta número 9", price: 1800, thumbnail: "img", code: "aab111", stock: 2})
+//     await manager.addProduct({title: "bici10", description: "bicicleta número 10", price: 1900, thumbnail: "img", code: "qaa111", stock: 2})
+//     await manager.getProductById(9)
+//     await manager.updateProduct(9, {title: "bici999", description: "producto 9 modificado"})
+//     await manager.deleteProduct(10)
+//     await manager.getProducts()
 
-}
-manager()
+// }
+// manager()
+
+export default manager;
