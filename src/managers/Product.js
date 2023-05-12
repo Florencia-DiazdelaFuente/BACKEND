@@ -20,9 +20,8 @@ class ProductManager {
         } else {
             this.products = JSON.parse(fs.readFileSync(path, "utf-8"))
             console.log("data recovered")
-            return "data recovered"
+            return 200
         }
-
     }
 
 
@@ -42,41 +41,30 @@ class ProductManager {
             return "getProducts: error"
         }
     }
-
+//------------------------------------------------------------------
 
     async addProduct ({title, description, price, thumbnail, code, stock}) {
         try {
-        const product = {
-            description,
-            title,
-            price,
-            thumbnail,
-            code,
-            stock,
-        }
-
-
-        if(this.products.length>0) {
-            let nextId = this.products[this.products.length-1].id+1
-
-            product.id = nextId
-        } else {
-            product.id = 1
-        }
-
-        this.products.push(product)
-
-        let productsJSON = JSON.stringify(this.products, null, 2)
-
-        await fs.promises.writeFile(this.path, productsJSON)
-
-        console.log("Created product id: " + product.id)
-        return "product id " + product.id
-    } 
-    catch(error) {
-        console.log(error)
-        return "addProduct: error"
-    } }
+            if (title&&description&&price&&thumbnail&&code&&stock) {
+                let data = {title, description, price, thumbnail, code, stock}
+                if(this.products.length>0) {
+                    let nextId = this.products[this.products.length-1].id+1
+                    data.id = nextId
+                } else {
+                    data.id = 1
+                }
+                this.products.push(data)
+                let dataJSON = JSON.stringify(this.products, null, 2)
+                await fs.promises.writeFile(this.path, dataJSON)
+                console.log("Created product id: " + data.id)
+                return 201
+            } console.log("Complete all data!")
+            return null
+        } 
+        catch(error) {
+            console.log(error)
+            return null
+        } }
 
 //----------------------------------------
 
@@ -105,45 +93,41 @@ class ProductManager {
 
     readProduct(id) {
         let oneProd = this.products.find(el=>el.id===id)
-        console.log(oneProd)
         return oneProd
-        
-
     }
-
+//----------------------------------------------------------------------
 
     async updateProduct(id, data) {
         try {
-            let oneProd = this.readProduct(id)
-
-            if (!oneProd) {
-                console.log("not found")
-            } else {
+            let oneProd = await this.readProduct(id)
                 for(let prop in data) {
                     oneProd[prop] = data[prop]
                 }
-            }
-            
             let dataJSON = JSON.stringify(this.products, null, 2)
             await fs.promises.writeFile(this.path, dataJSON)
-            console.log("update product: done")
-            return "update product: done"
+            console.log("updated product: " + id)
+            return 200
         } catch (error) {
             console.log(error)
-            return "updateProduct: error"
+            return null
         }
-
     }
-
+//---------------------------------------------------------
     async deleteProduct(id) {
         try {
-            this.products = this.products.filter(el => el.id !== id)
-            let dataJSON = JSON.stringify(this.products, null, 2)
-            await fs.promises.writeFile(this.path, dataJSON)
-            console.log("deleteProduct: done")
+            let one = this.products.find(el=>el.id===id)
+            if (one) {
+                this.products = this.products.filter(el=>el.id!==id)
+                let dataJson = JSON.stringify(this.products,null,2)
+                await fs.promises.writeFile(this.path,dataJson)
+                console.log('Deleted product: '+id)
+                return 200
+            }
+            console.log('product not found')
+            return null
         } catch (error) {
             console.log(error)
-        return "deleteProduct: error"
+        return null
         }
     }
 }

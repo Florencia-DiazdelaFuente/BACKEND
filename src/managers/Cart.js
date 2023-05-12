@@ -1,6 +1,5 @@
 import fs from "fs"
 
-
 class CartManager {
     
     constructor (path) {
@@ -22,35 +21,34 @@ class CartManager {
             console.log("data recovered")
             return 200
         }
-
     }
 
 
-    async getCarts () {
-        try {
-            const response = await fs.promises.readFile(this.path, "utf-8");
-            if (!response) {
-                console.log("not found")
-                return "not found"
-            } else {
-                console.log(response)
-                return JSON.parse(response);
-            }
+    // async getCarts () {
+    //     try {
+    //         const response = await fs.promises.readFile(this.path, "utf-8");
+    //         if (!response) {
+    //             console.log("not found")
+    //             return "not found"
+    //         } else {
+    //             console.log(response)
+    //             return JSON.parse(response);
+    //         }
             
-        } catch (error) {
-            console.log(error)
-            return "getCarts: error"
-        }
-    }
+    //     } catch (error) {
+    //         console.log(error)
+    //         return "getCarts: error"
+    //     }
+    // }
 
+    //-------------------------------------------------------
 
-    async addCart ({pid, quantity}) {
+    async addCart () {
         try {
         let data = {
-            products : [{pid, quantity}]
+            products : []
             // por ahora vacío hay que añadir objetos con pid y quantity
         }
-
 
         if(this.carts.length>0) {
             let nextId = this.carts[this.carts.length-1].id+1
@@ -60,11 +58,8 @@ class CartManager {
         }
 
         this.carts.push(data)
-
         let dataJSON = JSON.stringify(this.carts, null, 2)
-
         await fs.promises.writeFile(this.path, dataJSON)
-
         console.log("Created cart id: " + data.id)
         return 201
     } 
@@ -82,29 +77,27 @@ readCarts() {
 readCart(id) {
     let oneCart = this.carts.find(el=>el.id===id)
     return oneCart
-    
-
 }
 
 //----------------------------------------
 
-    async getCartById (id) {
-        const carts = await this.getCarts();
-        let oneCart = carts.find (el => el.id === id)
-        if (!oneCart) {
-            console.log("cart not found")
-            return "cart not found"
+    // async getCartById (id) {
+    //     const carts = await this.getCarts();
+    //     let oneCart = carts.find (el => el.id === id)
+    //     if (!oneCart) {
+    //         console.log("cart not found")
+    //         return "cart not found"
             
-        } else {
-            console.log("getCartById; " + oneCart)
-            return oneCart
+    //     } else {
+    //         console.log("getCartById; " + oneCart)
+    //         return oneCart
             
-        }
+    //     }
         
-    } catch(error) {
-        console.log(error)
-        return "getCartById: error"
-    }
+    // } catch(error) {
+    //     console.log(error)
+    //     return "getCartById: error"
+    // }
 //------------------------------------------------------
 
 async updateCart(id, data) {
@@ -148,15 +141,16 @@ async deleteCart(id) {
 
 
 }
+
+
 let manager = new CartManager("./src/data/carts.json")
 
-
 // async function cartManager () {
-//     await manager.addCart({ pid : 1, quantity: 4})
-//     await manager.addCart({ pid : 2, quantity: 1})
-//     await manager.addCart({ pid : 3, quantity: 6})
-//     await manager.addCart({ pid : 4, quantity: 1})
-//     await manager.getCartById(3)
+    
+//     await manager.addCart()
+//     await manager.addCart()
+//     await manager.addCart()
+//     await manager.addCart()
 // }
 
 // cartManager()

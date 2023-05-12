@@ -21,7 +21,7 @@ router.get('/', async(req,res,next)=> {
             return res.json({ status:200,products })
         }
         let message = 'not found'
-        return res.json({ status:404,message })
+        return res.json({ status:404, message })
     } catch(error) {
         next(error)
     }
@@ -40,6 +40,7 @@ router.get('/:pid', async(req,res,next)=> {
     }
 })
 router.put('/:pid', async(req,res,next)=> {
+
     try {
         let id = Number(req.params.pid)
         let data = req.body
