@@ -6,20 +6,19 @@ import {__dirname} from "./utils.js"
 import { engine } from 'express-handlebars'
 
 
-const server = express()
+const app = express()
 
-const PORT = 8080
-const ready = ()=> console.log("server ready on port " + PORT)
+// TEMPLATE ENGINE
+app.engine('handlebars',engine())
+app.set('views',__dirname+'/views')
+app.set('view engine','handlebars')
 
-server.engine('handlebars',engine())
-server.set('views',__dirname+'/views')
-server.set('view engine','handlebars')
+// MIDDLEWARES
+app.use('/public',express.static('public'))
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use('/',router)
+app.use(errorHandler)
+app.use(notFoundHandler)
 
-server.use('/public',express.static('public'))
-server.use(express.json())
-server.use(express.urlencoded({extended:true}))
-server.use('/',router)
-server.use(errorHandler)
-server.use(notFoundHandler)
-
-server.listen(PORT,ready)
+export default app
