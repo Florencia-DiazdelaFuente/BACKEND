@@ -43,10 +43,10 @@ class ProductManager {
     }
 //------------------------------------------------------------------
 
-    async addProduct ({title, description, price, thumbnail, code, stock}) {
+    async addProduct ({title, description, price, img, code, stock}) {
         try {
-            if (title&&description&&price&&thumbnail&&code&&stock) {
-                let data = {title, description, price, thumbnail, code, stock}
+            if (title&&description&&price&&img&&code&&stock) {
+                let data = {title, description, price, img, code, stock}
                 if(this.products.length>0) {
                     let nextId = this.products[this.products.length-1].id+1
                     data.id = nextId

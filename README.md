@@ -1,6 +1,7 @@
 # Backend
 Curso Backend
 
-Cambios primera entrega
+Desafío entregable con Handlebars y Websocket
+
 
 
