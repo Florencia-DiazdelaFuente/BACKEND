@@ -1,9 +1,11 @@
+import "dotenv/config.js";
 import express from "express"
 import router from "./routes/index.js"
 import errorHandler from "./middlewares/errorHandler.js"
 import notFoundHandler from "./middlewares/notFound.js"
 import {__dirname} from "./utils.js"
 import { engine } from 'express-handlebars'
+import logger from "morgan";
 
 
 const app = express()
@@ -17,8 +19,11 @@ app.set('view engine','handlebars')
 app.use('/public',express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(logger("dev"))
+
+//ROUTER
 app.use('/',router)
 app.use(errorHandler)
 app.use(notFoundHandler)
 
-export default app
+export default app;
