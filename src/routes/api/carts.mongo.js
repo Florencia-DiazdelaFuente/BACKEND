@@ -1,12 +1,12 @@
 import { Router } from "express"
-import manager from "../../dao/managers/Cart.js"
+import Carts from "../../dao/models/cart.model.js"
 
 const router = Router()
 
 router.post('/', async(req,res,next)=> {
     try {
-        let response = await manager.addCart(req.body)
-        if (response===201) {
+        let response = await Carts.create(req.body)
+        if (response) {
             return res.json({ status:201,message:'cart created'})
         }
         return res.json({ status:400,message:'not created'})
@@ -16,9 +16,9 @@ router.post('/', async(req,res,next)=> {
 })
 router.get('/', async(req,res,next)=> {
     try {
-        let all = manager.readCarts()
+        let all = await Carts.find()
         if (all.length>0) {
-            return res.json({ status:200,all })
+            return res.json({ status:200, all })
         }
         let message = 'not found'
         return res.json({ status:404,message })
@@ -26,10 +26,10 @@ router.get('/', async(req,res,next)=> {
         next(error)
     }
 })
-router.get('/:pid', async(req,res,next)=> {
+router.get('/:cid', async(req,res,next)=> {
     try {
-        let id = Number(req.params.pid)
-        let one = manager.readCart(id)
+        let id = req.params.cid
+        let one = await Carts.findById(id)
         if (one) {
             return res.json({ status:200,one })
         }
@@ -39,12 +39,12 @@ router.get('/:pid', async(req,res,next)=> {
         next(error)
     }
 })
-router.put('/:pid', async(req,res,next)=> {
+router.put('/:cid', async(req,res,next)=> {
     try {
-        let id = Number(req.params.pid)
+        let id = req.params.cid
         let data = req.body
-        let response = await manager.updateCart(id,data)
-        if (response===200) {
+        let response = await Carts.findByIdAndUpdate(id,data, {new: true})
+        if (response) {
             return res.json({ status:200,message:'cart updated'})
         }
         return res.json({ status:404,message:'not found'})
@@ -52,11 +52,11 @@ router.put('/:pid', async(req,res,next)=> {
         next(error)
     }
 })
-router.delete('/:pid', async(req,res,next)=> {
+router.delete('/:cid', async(req,res,next)=> {
     try {
-        let id = Number(req.params.pid)
-        let response = await manager.deleteCart(id)
-        if (response===200) {
+        let id = req.params.cid
+        let response = await Carts.findByIdAndDelete(id)
+        if (response) {
             return res.json({ status:200,message:'cart deleted'})
         }
         return res.json({ status:404,message:'not found'})

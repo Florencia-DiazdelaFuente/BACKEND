@@ -1,4 +1,5 @@
 import "dotenv/config.js";
+import {connect} from "mongoose"
 import express from "express"
 import router from "./routes/index.js"
 import errorHandler from "./middlewares/errorHandler.js"
@@ -25,5 +26,11 @@ app.use(logger("dev"))
 app.use('/',router)
 app.use(errorHandler)
 app.use(notFoundHandler)
+
+// DATABASE
+connect("mongodb+srv://flordiaz:hola1234@dbflorencia.35cenzt.mongodb.net/commerce")
+    .then(()=>console.log("database connected"))
+    .catch(err=>console.log(err))
+
 
 export default app;

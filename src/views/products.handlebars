@@ -1,9 +1,9 @@
 <div class="d-flex justify-content-evenly text-center mt-3 mb-3">
     {{#each products}}
     <div class="card" style="width: 15rem;"> 
-        <img src={{this.img}} class="card-img-top" alt="foto">
+        <img src={{products.img}} class="card-img-top" alt="foto">
         <div class="card-body">
-            <h5 class="card-title">{{this.title}}</h5>
+            <h5 class="card-title">{{products.title}}</h5>
             <p class="card-text">Un producto</p>
             <a href="#" class="btn btn-primary">Comprar</a>
         </div>

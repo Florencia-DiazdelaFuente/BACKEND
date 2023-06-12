@@ -1,9 +1,10 @@
 import { Router } from "express";
-import manager from "../../managers/Product.js"
+// import manager from "../../dao/managers/Product.js"
+import Product from "../../dao/models/product.model.js";
 
 const productsRouter = Router();
 
-let allProducts = manager.readProducts()
+let allProducts = Product.find()
 
 productsRouter.get('/all_products', async(req,res,next)=> {
     try {
