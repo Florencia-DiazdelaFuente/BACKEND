@@ -1,15 +1,16 @@
 import { Router } from "express"
 import Product from "../../dao/models/product.model.js"
+import validatorProduct from "../../middlewares/validatorProduct.js"
 // import manager from '../../dao/managers/Product.js'
 
 const router = Router()
 
-router.post('/', async(req,res,next)=> {
+router.post('/', validatorProduct, async(req,res,next)=> {
     try {
         console.log(req.body)
         let response = await Product.create(req.body)
         if (response) {
-            return res.json({ status:201,message:'product created'})
+            return res.status(201).json({ status:201,message:'product created'})
         }
         return res.json({ status:400,message:'not created'})
     } catch(error) {

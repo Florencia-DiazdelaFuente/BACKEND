@@ -2,7 +2,7 @@ import {model, Schema} from "mongoose"
 
 let collection = "products"
 let schema = new Schema({
-    title: {type: String, required: true},
+    title: {type: String, required: true, index: true},
     description: {type: String, required: true},
     stock: {type: Number, required: true},
     img: {type: String, required: true},
