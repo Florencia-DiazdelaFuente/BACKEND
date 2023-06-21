@@ -5,33 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="./style.css">
     <title>New Product Form</title>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm bg-danger">
-            <div class="container-fluid">
-                <a class="navbar-brand text-light" href="/index.html">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="/products.html">Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="/form.html">New Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="/chat.html">Chat</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="/cart.html"><img class="w-50" src="./images/carrito.png" alt="carrito"></a>
-                        </li>
-                    </ul>
+        <nav class="navbar navbar-expand-sm bg-success">
+            <div class="container-fluid header">
+                <div>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link nav-link text-light" href="index.html">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="products.html">Products</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="form.html">New Product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" href="chat.html">Chat</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 col-6" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+                <a class="nav-link text-light" href="/cart.html"><img class="w-75" src="./images/carritoBlanco.png" alt="carrito"></a>
             </div>
         </nav>
     </header>
@@ -39,7 +42,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-6 d-flex flex-column">
-                    <h3>New Product Register</h3>
+                    <h3 class="text-center m-2 p-2 border-bottom">New Product Register</h3>
                     <form id="productsForm">
                         <fieldset class="mb-2">
                             <label for="productTitle" class="form-label">Title</label>
@@ -74,9 +77,27 @@
         </div>
     </main>
     
-<footer class="bg-warning p-2 text-center">
-    PIE DE PAGINA
-</footer>
+    <footer class="bg-success p-2 text-center">
+        <section class="container-fluid">
+            <div class="row d-flex align-items-center justify-content-between">
+                <div class="col-3">
+                    <a href="./index.html" class="text-decoration-none"> <img src="./images/LogoModif.png" alt="logoTBS" class="w-50"></a>
+                </div>
+                <div class="col-4"> 
+                    <h6 class="text-light">CONTACTO</h6>
+                    <ul class="text-light fst-italic list-unstyled text-center small pt-1">
+                        <li>(011) 1234-5678</li>
+                        <li>thebikestore@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="col-3 d-flex justify-content-around align-items-center flex-sm-column flex-md-row">
+                    <a href="https://twitter.com/?lang=es"> <img src="./images/twitterBlanco.png" alt="logoTwitter" class="w-75"></a>
+                    <a href="https://www.instagram.com/"> <img src="./images/instagramBlanco.png" alt="logoInstagram" class="w-75"></a>
+                    <a href="https://www.facebook.com/"> <img src="./images/facebookBlanco.png" alt="logoFacebook" class="w-75"></a>
+                </div>
+            </div>
+        </section>
+    </footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="scripts/form.js"></script>

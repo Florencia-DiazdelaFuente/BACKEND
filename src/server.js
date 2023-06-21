@@ -1,24 +1,30 @@
 import app from "./app.js";
-import { Server } from "socket.io";
+import { connect } from "mongoose"
+// import { Server } from "socket.io";
 
 
-const PORT = process.env.PORT || 8080;
-const ready = ()=> console.log("server ready on port " + PORT)
+const port = process.env.PORT || 8080;
+const ready = ()=> {
+    console.log("server ready on port " + port);
+    connect(process.env.LINK_MONGO)
+    .then(()=>console.log("database connected"))
+    .catch(err=>console.log(err))
 
-const chats = [];
+}
+// const chats = [];
 
-const http_server = app.listen(PORT,ready);
-const socket_server = new Server(http_server)
+const http_server = app.listen(port,ready);
+// const socket_server = new Server(http_server)
 
-socket_server.on(
-    'connection',
-    (socket) => {
-        console.log(`Client ${socket.client.id} connected`)
-        socket.on( "auth", ()=>{  socket_server.emit("allMessages", chats) } )
-        socket.on("new_message", (data) =>{
-            chats.push(data);
-            console.log(chats);
-            socket_server.emit("allMessages", chats)
-            })
-    }
-    )
+// socket_server.on(
+//     'connection',
+//     (socket) => {
+//         console.log(`Client ${socket.client.id} connected`)
+//         socket.on( "auth", ()=>{  socket_server.emit("allMessages", chats) } )
+//         socket.on("new_message", (data) =>{
+//             chats.push(data);
+//             console.log(chats);
+//             socket_server.emit("allMessages", chats)
+//             })
+//     }
+//     )
