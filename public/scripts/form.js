@@ -7,7 +7,6 @@ selector.addEventListener("click", (event)=> {
     let stock = document.getElementById("productStock").value
     let code = document.getElementById("productCode").value
     let img = document.getElementById("productImage").value
-// console.log({title, description, price, stock, code, img})
 
     fetch("/api/products", {
         method: "POST",
