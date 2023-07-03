@@ -22,7 +22,7 @@ router.post('/', async(req,res,next)=> {
 })
 router.get('/', async(req,res,next)=> {
     try {
-        let carts = await Carts.find().populate("product", "title description price -_id")
+        let carts = await Carts.find().populate("products.productId", "title description price -_id")
         if (carts.length>0) {
             return res.json({ status:200, carts })
         }
