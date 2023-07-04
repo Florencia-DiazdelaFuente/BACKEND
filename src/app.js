@@ -7,7 +7,8 @@ import notFoundHandler from "./middlewares/notFound.js"
 import {__dirname} from "./utils.js"
 import logger from "morgan";
 import mongoStore from "connect-mongo"
-
+import passport from "passport";
+import initializePassport from "./config/passport.js"
 
 const app = express()
 
@@ -27,6 +28,9 @@ app.use('',express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(logger("dev"))
+initializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 //ROUTER
 app.use('/',router)
