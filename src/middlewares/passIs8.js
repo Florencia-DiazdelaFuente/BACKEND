@@ -1,4 +1,4 @@
-function validPassword (req,res,next){
+function passIs8 (req,res,next){
     const {password} = req.body
     if (password.length < 8) {
         return res.status(400).json({
@@ -8,4 +8,4 @@ function validPassword (req,res,next){
         next()
     }
     }
-    export default validPassword
+    export default passIs8
