@@ -6,6 +6,7 @@ import errorHandler from "./middlewares/errorHandler.js"
 import notFoundHandler from "./middlewares/notFound.js"
 import {__dirname} from "./utils.js"
 import logger from "morgan";
+import cookieParser from "cookie-parser"
 import mongoStore from "connect-mongo"
 import passport from "passport";
 import initializePassport from "./config/passport.js"
@@ -28,6 +29,7 @@ app.use('',express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(logger("dev"))
+app.use(cookieParser(process.env.SECRET_COOKIE))
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())

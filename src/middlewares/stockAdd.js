@@ -1,4 +1,4 @@
-import Products from "../dao/models/product.model.js"
+import Products from "../dao/Mongo/models/product.model.js"
 
 const stockAdd = async(req, res, next) => {
 	try {

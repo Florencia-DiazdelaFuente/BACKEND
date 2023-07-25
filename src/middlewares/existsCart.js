@@ -1,4 +1,4 @@
-import Carts from "../dao/models/cart.model.js"
+import Carts from "../dao/Mongo/models/cart.model.js"
 
 function existsCart (req,res,next) {
     let cid = req.params.cid

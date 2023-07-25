@@ -1,7 +1,8 @@
 import passport from "passport"
 import {Strategy} from "passport-local"
 import GHStrategy from "passport-github2"
-import User from "../dao/models/User.js"
+import User from "../dao/Mongo/models/User.js"
+import jwt from "passport-jwt"
 
 const {GH_CLIENT_ID, GH_CLIENT_SECRET} = process.env
 const callback = "http://localhost:8080/api/auth/github/callback"
@@ -17,24 +18,28 @@ export default function () {
             return done(null, user)
         }
     )
-
+// ESTRATEGIA DE REGISTRO
     passport.use( "register", 
                 new Strategy(
                 {passReqToCallback: true, usernameField: "email"},
                 async(req, username, password, done) => {
                     try {
                         let one = await User.findOne({email: username})
-                        if (!one) {
+                        if (one) {
+                            return done(null, false)
+                        } else {
                             let user = await User.create(req.body)
+                            delete user.password         // para el registro no es necesario inyectar la constraseña a la propiedad user del obj de requerimiento
                             return done(null, user)
-                        }
-                        return done(null, false)
+                        } 
+                        
+                        
                     } catch (error) {
                         return done(error, false)
                     }
                 }
     ))
-
+// ESTRATEGIA DE INICIO DE SESIÓN
     passport.use(
         'signin',
         new Strategy(
@@ -74,6 +79,26 @@ export default function () {
                     return done(null, user)
                 } catch (error) {
                     return done(error)
+                }
+            }
+        )
+    )
+
+    passport.use(      //estrategia para AUTENTICAR usuarios
+        "jwt",
+        new jwt.Strategy(
+            {secretOrKey:process.env.SECRET_JWT, jwtFromRequest:jwt.ExtractJwt.fromExtractors([(req)=> req?.cookies["token"]])},
+            async(jwt_payload, done) => {
+                try {
+                    let one = await User.findOne({email:jwt_payload.email})
+                    if (one) {
+                        delete one.password
+                        return done(null, one)
+                    } else{
+                        return done(null, false)
+                    }
+                } catch (error) {
+                    return done(error,false)
                 }
             }
         )

@@ -1,6 +1,8 @@
 import { Router } from "express"
 import manager from '../../managers/Product.js'
 
+
+
 const router = Router()
 
 router.post('/', async(req,res,next)=> {
