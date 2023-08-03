@@ -1,13 +1,13 @@
 import dotenv from "dotenv"
-import commander from "../utils/commander";
-import MongoSingleton from "./mongoSingleton";
+import commander from "../utils/commander.js";
+import MongoSingleton from "./mongoSingleton.js";
 
 const {mode} = commander.opts()
 
 
 // const environment = "production"
 dotenv.config({
-    path: environment === "development" ? "./.env.development" : "./.env.production"
+    path: mode === "development" ? "./.env.development" : "./.env.production"
 });
 
 export default {
@@ -19,5 +19,8 @@ export default {
     GHAppID: process.env.GH_APP_ID,
     GHClientID: process.env.GH_CLIENT_ID,
     GHClientSecret: process.env.GH_CLIENT_SECRET,
+    persistence: process.env.PERSISTENCE,
+    gmailUserApp: process.env.GMAIL_USER,
+    gmailPassApp: process.env.GMAIL_PASS_APP,
     connectDB: () => MongoSingleton.getInstance()
 }

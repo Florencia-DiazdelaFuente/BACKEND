@@ -10,17 +10,18 @@ import cookieParser from "cookie-parser"
 import mongoStore from "connect-mongo"
 import passport from "passport";
 import initializePassport from "./config/passport.js"
+import config from "./config/config.js"; 
 
 const app = express()
 
 
 // MIDDLEWARES
 app.use(expressSession({
-    secret: process.env.SECRET_SESSION,
+    secret: config.secretSession,
     resave: true,
     saveUninitialized: true,
     store: mongoStore.create({
-        mongoUrl: process.env.LINK_MONGO,
+        mongoUrl: config.linkMongo,
         ttl: 10000
     })
 }))
@@ -29,7 +30,7 @@ app.use('',express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(logger("dev"))
-app.use(cookieParser(process.env.SECRET_COOKIE))
+app.use(cookieParser(config.secretCookie))
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())

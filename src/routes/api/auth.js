@@ -87,7 +87,7 @@ passport_call('jwt'),
     async(req,res,next)=>{
         try {
             return res.status(200).clearCookie('token').json({
-                success: false,
+                success: true,
                 message: 'user signed out!'
             })
         } catch (error) {

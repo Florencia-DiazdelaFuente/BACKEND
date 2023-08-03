@@ -1,19 +1,20 @@
 import app from "./app.js";
 import { connect } from "mongoose"
+import config from "./config/config.js"
 // import { Server } from "socket.io";
 
 
-const port = process.env.PORT || 8080;
+// const port = process.env.PORT || 8080;
 const ready = ()=> {
-    console.log("server ready on port " + port);
-    connect(process.env.LINK_MONGO)
+    console.log("server ready on port " + config.port);
+    connect(config.linkMongo)
     .then(()=>console.log("database connected"))
     .catch(err=>console.log(err))
 
 }
 // const chats = [];
 
-const http_server = app.listen(port,ready);
+const http_server = app.listen(config.port,ready);
 // const socket_server = new Server(http_server)
 
 // socket_server.on(

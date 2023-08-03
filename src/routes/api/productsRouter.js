@@ -13,7 +13,8 @@ const productController = new ProductController()
 
 
 router.post('/', validatorProduct, productController.createProduct )
-router.get('/', passport_call("jwt"), authorization, productController.getProducts)
+// router.get('/', passport_call("jwt"), authorization, productController.getProducts)
+router.get('/', productController.getProducts)
 router.get('/:pid', productController.getProduct )
 router.put('/:pid', productController.updateProduct )
 router.delete('/:pid', productController.deleteProduct)

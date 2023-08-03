@@ -6,6 +6,7 @@ import cartsRouter from "./cartsRouter.js"
 import cookies_router from "./cookies.js"
 import UsersRouter from "./userRouter.js"
 import SessionRouter from "./sessionRouter.js"
+import mailRouter from "./mailRouter.js"
 
 
 const router = Router()
@@ -19,6 +20,7 @@ router.use('/carts',cartsRouter)
 router.use("/cookies", cookies_router)
 router.use("/users", usersRouter.getRouter())
 router.use("/sessions", sessionRouter.getRouter())
+router.use("/correo", mailRouter)
 
 
 export default router

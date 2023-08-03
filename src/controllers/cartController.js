@@ -7,7 +7,7 @@ export default class CartController {
 
     getCarts = async(req,res,next)=> {
         try {
-            let carts = this.cartService.getCarts() 
+            let carts = this.cartService.get() 
             if (carts.length>0) {
                 return res.json({ status:200, carts })
             }
@@ -20,7 +20,7 @@ export default class CartController {
     getCart = async(req,res,next)=> {
         try {
             let cid = req.params.cid
-            let one = this.cartService.getCart(cid)
+            let one = this.cartService.getById(cid)
             if (one) {
                 return res.json({ status:200,one })
             }
@@ -34,7 +34,7 @@ export default class CartController {
         try {
             let cid = req.params.cid
             let data = req.body
-            let response = this.cartService.updateCart(cid, data)
+            let response = this.cartService.update(cid, data)
             if (response) {
                 return res.json({ status:200,message:'cart updated'})
             }
@@ -45,7 +45,7 @@ export default class CartController {
     }
     createCart = async(req,res,next)=> {
         try {
-            let response = this.cartService.createCart()
+            let response = this.cartService.create()
             if (response) {
                 return res.json({ status:201,message:'cart created'})
             }
@@ -57,7 +57,7 @@ export default class CartController {
     deleteCart = async(req,res,next)=> {
         try {
             let cid = req.params.cid
-            let response = this.cartService.deleteCart(cid)
+            let response = this.cartService.delete(cid)
             if (response) {
                 return res.json({ status:200,message:'cart deleted'})
             }

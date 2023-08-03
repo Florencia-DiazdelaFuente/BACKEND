@@ -1,5 +1,6 @@
 import principalRouter from "./principalRouter.js"
 import jwt from "jsonwebtoken"
+import config from "../../config/config.js"
 
 export default class SessionRouter extends principalRouter {
     init(){
@@ -8,7 +9,7 @@ export default class SessionRouter extends principalRouter {
                 email: req.body.email,
                 role: "user"
             }
-            let token = jwt.sign(user, process.env.SECRET_JWT);
+            let token = jwt.sign(user, config.secretJWT);
             res.sendSuccess({token})
 
         })

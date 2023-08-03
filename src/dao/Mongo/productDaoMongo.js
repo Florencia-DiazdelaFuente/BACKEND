@@ -4,19 +4,19 @@ export default class ProductDaoMongo {
     constructor(){
         this.productModel = Product
     }
-    getProducts =   async (limit=5, page=1)=> {
+    get =   async (limit=5, page=1)=> {
         return await this.productModel.paginate({},{ limit,page })
         }
-    getProduct =    async (pid)=> {
+    getById =    async (pid)=> {
         return await this.productModel.findById(pid)
     }
-    createProduct = async ()=> {
-        return await this.productModel.create(newProduct)
+    create = async (data)=> {
+        return await this.productModel.create(data)
     }
-    updateProduct = async (pid, data)=> {
+    update = async (pid, data)=> {
         return await this.productModel.findByIdAndUpdate(pid,data, {new: true})
     }
-    deleteProduct = async (pid)=> {
+    delete = async (pid)=> {
         return await this.productModel.findByIdAndDelete(pid)
     }
 

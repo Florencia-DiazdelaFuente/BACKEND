@@ -4,14 +4,13 @@ import {productService}  from "../service/index.js"
 export default class ProductController {
     constructor(){
         this.productService = productService
-
     }
 
         getProducts =  async(req,res,next)=> {
-            const {limit , page } = req.query
             try {
-                let all  = await this.productService.getProducts(limit, page)
-                return res.status(200).json({ success: true, response: all })
+                const {limit , page } = req.query
+                let products  = await this.productService.get(limit, page)
+                return res.status(200).json({ success: true, response: products })
             } catch (error) {
                 return next(error)
             }
@@ -20,7 +19,7 @@ export default class ProductController {
         getProduct = async(req,res,next)=> {
             try {
                 let pid = req.params.pid
-                let product = await this.productService.getProduct(pid) 
+                let product = await this.productService.getById(pid) 
                 if (product) {
                     return res.json({ status:200,product })
                 }
@@ -33,7 +32,7 @@ export default class ProductController {
         createProduct =  async(req,res,next)=> {
             try {
                 const newProduct = req.body
-                let response = await this.productService.createProduct(newProduct)
+                let response = await this.productService.create(newProduct)
                 if (response) {
                     return res.status(201).json({ status:201,message:'product created'})
                 }
@@ -47,7 +46,7 @@ export default class ProductController {
             try {
                 let pid = req.params.pid
                 let data = req.body
-                let response =  await this.productService.updateProduct(pid, data)
+                let response =  await this.productService.update(pid, data)
                 if (response) {
                     return res.json({ status:200,message:'product updated'})
                 }
@@ -59,7 +58,7 @@ export default class ProductController {
         deleteProduct = async(req,res,next)=> {
             try {
                 let pid = req.params.pid
-                let response = await this.productService.deleteProduct(pid)
+                let response = await this.productService.delete(pid)
                 if (response) {
                     return res.json({ status:200,message:'product deleted'})
                 }

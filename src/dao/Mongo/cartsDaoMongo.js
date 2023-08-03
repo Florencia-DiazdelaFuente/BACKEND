@@ -5,20 +5,20 @@ export default class CartDaoMongo {
         this.cartModel = Cart
     }
 
-    getCarts = async() => {
+    get = async() => {
         return await this.cartModel.find().populate("products.productId", "title description price -_id")
     }
-    getCart = async(cid) => {
+    getById = async(cid) => {
         return await this.cartModel.findById(cid)
     }
-    updateCart = async(cid, data) => {
+    update = async(cid, data) => {
         return await this.cartModel.findByIdAndUpdate(cid,data, {new: true})
         
     }
-    createCart = async() => {
-        return await this.cartModel.create(req.body)
+    create = async(newCart) => {
+        return await this.cartModel.create(newCart)
     }
-    deleteCart = async(cid) => {
+    delete = async(cid) => {
         return await this.cartModel.findByIdAndDelete(cid)}
     updateCartUnit = async() => {
         return await this.cartModel.findByIdAndUpdate(cid, data)
