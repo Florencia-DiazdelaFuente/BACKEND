@@ -73,6 +73,7 @@ export default class CartController {
             let pid = req.params.pid
             let quantity = Number(req.params.units)
             let data = { pid,quantity }
+            this.cartService.updateCartUnit(cid, data)
             
             return res.json({ status:200,message:'Product added!' })
         } catch(error) {

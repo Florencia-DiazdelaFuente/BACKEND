@@ -9,19 +9,19 @@ export default class CartRepository {
         return result 
     }
     getById = async (cid)=> {
-        let result = await this.dao.getById()
+        let result = await this.dao.getById(cid)
         return result 
     }
     create = async ()=> {
         let result = await this.dao.create()
         return result 
     }
-    update = async (cid, updatedCart)=> {
-        let result = await this.dao.update()
+    update = async (cid, data)=> {
+        let result = await this.dao.update(cid, data)
         return result 
     }
     delete = async (cid)=> {
-        let result = await this.dao.delete()
+        let result = await this.dao.delete(cid)
         return result 
     }
 }
