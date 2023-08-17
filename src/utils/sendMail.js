@@ -17,12 +17,12 @@ const sendMail = async () => {
         from: 'Coder Test <dflorencia07@gmail.com>',
         to: 'dflorencia07@gmail.com',
         subject: 'Correo electrónico de prueba',
-        html: `<h1>ESto es un correo de prueba</h1>`,
-        attachments: [{
-            // filename: 'nodejs.png',
-            // path: __dirname+'/nodejs.png',
-            // cid: 'nodejs'
-        }]
+        html: `<h1>Esto es un correo de prueba</h1>`,
+        // attachments: [{
+        //     filename: 'nodejs.png',
+        //     path: __dirname+'/nodejs.png',
+        //     cid: 'nodejs'
+        // }]
     })
 }
 

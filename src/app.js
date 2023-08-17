@@ -11,6 +11,7 @@ import mongoStore from "connect-mongo"
 import passport from "passport";
 import initializePassport from "./config/passport.js"
 import config from "./config/config.js"; 
+import { addLogger } from "./config/logger.js";
 
 const app = express()
 
@@ -34,6 +35,7 @@ app.use(cookieParser(config.secretCookie))
 initializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(addLogger)
 
 //ROUTER
 app.use('/',router)
